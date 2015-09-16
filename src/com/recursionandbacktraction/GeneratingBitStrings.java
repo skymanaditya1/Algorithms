@@ -25,6 +25,7 @@ public class GeneratingBitStrings {
      */
     public static void generateBitStrings1(int size){
         int[][] numBinStrings = new int[(int) Math.pow(2, size)][size];
+        System.out.println(0);
         for(int num=0; num<size; num++){
             convertToBinary(num);
         }
@@ -38,4 +39,6 @@ public class GeneratingBitStrings {
         }
         System.out.println(new StringBuilder(binEquivalent).reverse().toString());
     }
+
+
 }
