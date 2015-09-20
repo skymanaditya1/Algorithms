@@ -213,8 +213,48 @@ class DLLList{
             // remove the appropriate element from the list
             DLLNode node = head;
             for(int i=1; i<position; i++){
-
+                node = node.getNext();
             }
+
+            DLLNode temp = node;
+
+            if (position == getSize() - 1){
+                // remove the rear of the list
+                DLLNode temp1 = temp.getNext();
+                node.setNext(null);
+                return temp1;
+            }
+
+            node.getNext().setPrev(node.getPrev());
+            node.getPrev().setNext(node.getNext());
+            return temp;
+        }
+    }
+
+    // returns the first occurrence of an element if found in the list, an error message otherwise
+    public int getPosition(int data){
+        if (getSize() == 0)
+        {
+            System.out.println("List is empty ");
+            return -1;
+        }
+
+        /**else if (head.getData() == data){
+            // return the position of the head , which is 0
+            return 0;
+        }*/
+
+        else{
+            int position = 0;
+            DLLNode node = head;
+            while(node != null){
+                if (node.getData() == data){
+                    return position;
+                }
+                position += 1;
+                node = node.getNext();
+            }
+            return -1;
         }
     }
 
@@ -231,10 +271,6 @@ class DLLList{
         }
         return result + "]";
     }
-
-
-    // Search for an element in a list and return the position if found
-
 }
 
 public class DoublyLinkedList {
@@ -250,6 +286,8 @@ public class DoublyLinkedList {
             System.out.println("3. Insert an element ");
             System.out.println("4. Remove the element from the beginning ");
             System.out.println("5. Remove the element from the end ");
+            System.out.println("6. Remove an element ");
+            System.out.println("7. Find an element in the list ");
             System.out.println("8. Traverse the list ");
             switch(in.nextInt()){
                 case 1:System.out.println("Enter an element to insert : ");
@@ -269,6 +307,18 @@ public class DoublyLinkedList {
                 case 4:System.out.println("The elemenet removed is "+list.removeBegin().getData());
                     break;
                 case 5:System.out.println("The element removed is "+list.removeEnd().getData());
+                    break;
+                case 6:System.out.println("Enter the position of the element to remove : ");
+                    int pos = in.nextInt();
+                    System.out.println(list.remove(pos).getData());
+                    break;
+                case 7:System.out.println("Enter the element to be found ");
+                    data = in.nextInt();
+                    if(list.getPosition(data)!=-1){
+                        System.out.println("Element found at position "+list.getPosition(data));
+                    }
+                    else
+                        System.out.println("Element not found in the list ");
                     break;
                 case 8:System.out.println(list.toString());
                     break;
