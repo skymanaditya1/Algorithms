@@ -215,6 +215,32 @@ class ListClass{
         return hash;
     }
 
+    // Method for finding the value of the nth node from the end of the linked list in one pass O(n)
+    public int NthNodeFromEndOnePass(int position){
+        // Keep two pointers , both pointing to the head of the list
+        node ptemp = head, pnthnode = null;
+        for(int i=1; i<position; i++){
+            if(ptemp!=null)
+                ptemp = ptemp.getNext();
+        }
+
+        while(ptemp!=null){
+            if(pnthnode == null)
+                pnthnode = head;
+            else{
+                pnthnode = pnthnode.getNext();
+            }
+            ptemp = ptemp.getNext();
+        }
+
+        if (pnthnode != null)
+            return pnthnode.getData();
+        else{
+            System.out.println("Fewer than n nodes ");
+            return Integer.MIN_VALUE ; // return some arbitrary value
+        }
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -242,6 +268,7 @@ public class ProblemsOnLinkedLists {
             System.out.println("6. Find the length of the list ");
             System.out.println("7. Problem 1 : Find the nth node from the end of the linked list O(n2)");
             System.out.println("8. Problem 2 : Find the nth node from the end of the linked list O(n), HashTable ");
+            System.out.println("9. Problem 3 : Find the nth node from the end of the linked list in one scan ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -269,6 +296,11 @@ public class ProblemsOnLinkedLists {
                     n = in.nextInt();
                     System.out.println("The value of the nth node from the end using hashtable is : "+
                     list.findNthNodeFromEndHash(n));
+                    break;
+                case 9:System.out.println("Enter the value of n : ");
+                    n = in.nextInt();
+                    System.out.println("The value of the nth node from the end in single pass is : "+
+                    list.NthNodeFromEndOnePass(n));
                     break;
                 default:
                     System.out.println("Exit...");
