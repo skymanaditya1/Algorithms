@@ -1,5 +1,6 @@
 package com.linkedlists;
 
+import java.util.Hashtable;
 import java.util.Scanner;
 
 /**
@@ -180,6 +181,40 @@ class ListClass{
         return Integer.MAX_VALUE; // return some arbitrarily huge value
     }
 
+    // Method for finding the nth node from the end using a hash table
+    public int findNthNodeFromEndHash(int n){
+        // check if the list is emtpy
+        if (getLength() < n){
+            System.out.println("Fewer than n nodes ");
+            return Integer.MIN_VALUE; // return some arbitrary value
+        }
+
+        // create a hash table of the form <position of the node, address of the node>
+        // hash table will be of the form <key, value of the node>
+        else{
+            Hashtable listHash = createHashTable(); // creates hash table of the entries of the linked list
+            // Finding the nth element from the end is similar to finding the length() - n + 1 th element from beginning
+            int position = getLength() - n + 1;
+            node temp1 = (node) listHash.get(position);
+            return temp1.getData();
+        }
+    }
+
+    // method to create the hash table of the entries of the linked list of the form
+    // <position of the node in the list, address of the node>
+    public Hashtable createHashTable(){
+        Hashtable hash = new Hashtable();
+        // add the elements of the list to the hash table
+        int position = 1;
+        node temp = head;
+        while(temp!=null){
+            hash.put(position, temp);
+            temp = temp.getNext();
+            position ++ ;
+        }
+        return hash;
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -195,6 +230,7 @@ public class ProblemsOnLinkedLists {
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
         int data;
+        int n;
         ListClass list = new ListClass();
         while(true){
             System.out.println("Menu. Enter your choice ");
@@ -204,7 +240,8 @@ public class ProblemsOnLinkedLists {
             System.out.println("4. Remove node at the end of the list ");
             System.out.println("5. Traverse the list ");
             System.out.println("6. Find the length of the list ");
-            System.out.println("7. Problem 1 : Find the nth node from the end of the linked list ");
+            System.out.println("7. Problem 1 : Find the nth node from the end of the linked list O(n2)");
+            System.out.println("8. Problem 2 : Find the nth node from the end of the linked list O(n), HashTable ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -215,18 +252,23 @@ public class ProblemsOnLinkedLists {
                     data = in.nextInt();
                     list.insertAtEnd(data);
                     break;
-                case 3:System.out.println("The element removed from the head is : "+list.removeFromBegin());
+                case 3:System.out.println("The element removed from the head is : " + list.removeFromBegin());
                     break;
                 case 4:
                     System.out.println("The element removed from the end is : " + list.removeFromEnd());
                     break;
                 case 5:list.traverse();
                     break;
-                case 6:System.out.println("The length of the list is : "+list.getLength());
+                case 6:System.out.println("The length of the list is : " + list.getLength());
                     break;
                 case 7:System.out.println("Enter the value of n : ");
-                    int n = in.nextInt();
+                    n = in.nextInt();
                     System.out.println("The value of the nth node from the end is : "+list.findNthNodeFromEnd(n));
+                    break;
+                case 8:System.out.println("Enter the value of n : ");
+                    n = in.nextInt();
+                    System.out.println("The value of the nth node from the end using hashtable is : "+
+                    list.findNthNodeFromEndHash(n));
                     break;
                 default:
                     System.out.println("Exit...");
