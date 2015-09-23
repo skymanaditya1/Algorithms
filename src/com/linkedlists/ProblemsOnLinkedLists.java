@@ -131,6 +131,55 @@ class ListClass{
         }
     }
 
+    // method to count the number of nodes in the list starting from a given node
+    public int getLengthNode(node temp){
+        int countAfter = 0;
+
+        while(temp!=null){
+            countAfter ++;
+            temp = temp.getNext();
+        }
+        return countAfter;
+    }
+
+    // method to find the nth node from the end
+    public int findNthNodeFromEnd(int n){
+        // check if the list is empty
+        /**if (head == null){
+            System.out.println("Fewer than n nodes ");
+            return Integer.MIN_VALUE;
+        }*/
+        if (getLength() < n){
+            System.out.println("Fewer than n nodes ");
+            return Integer.MIN_VALUE; // return some arbitrary value
+        }
+
+        // the case of n = 1 was not being handled by else clause for some reason
+        else if (n == 1){
+            // return the last node of the list
+            node temp = head;
+            while(temp.getNext()!=null)
+                temp = temp.getNext();
+            return temp.getData();
+        }
+
+        // return the nth node from the end
+        else{
+            node temp = head;
+            while (temp.getNext() != null){
+                node next = temp.getNext();
+                if (getLengthNode(next) == n - 1){
+                    return temp.getData();
+                }
+                else{
+                    temp = temp.getNext();
+                }
+            }
+        }
+
+        return Integer.MAX_VALUE; // return some arbitrarily huge value
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -168,11 +217,16 @@ public class ProblemsOnLinkedLists {
                     break;
                 case 3:System.out.println("The element removed from the head is : "+list.removeFromBegin());
                     break;
-                case 4:System.out.println("The element removed from the end is : "+list.removeFromEnd());
+                case 4:
+                    System.out.println("The element removed from the end is : " + list.removeFromEnd());
                     break;
                 case 5:list.traverse();
                     break;
                 case 6:System.out.println("The length of the list is : "+list.getLength());
+                    break;
+                case 7:System.out.println("Enter the value of n : ");
+                    int n = in.nextInt();
+                    System.out.println("The value of the nth node from the end is : "+list.findNthNodeFromEnd(n));
                     break;
                 default:
                     System.out.println("Exit...");
