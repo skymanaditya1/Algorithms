@@ -246,7 +246,7 @@ class ListClass{
     public void createCyclicOrNullTerminatedList(){
         // Creating a linked list with a cycle
        //  1-> 2-> 3-> 4-> 5-> 6-> 3-> 4-> 5-> 6-> 3-> ...
-
+/**
         head = new node(1);
         node temp1 = new node(2);
         head.setNext(temp1);
@@ -259,11 +259,11 @@ class ListClass{
         node temp5 = new node(6);
         temp4.setNext(temp5);
         temp5.setNext(temp2); // denotes a cycle
-
+*/
         // Creating a linked list without a cycle
         // 1-> 2-> 3-> 4-> 5-> null
 
-        /**
+
         head = new node(1);
         node temp1 = new node(2);
         head.setNext(temp1);
@@ -273,7 +273,7 @@ class ListClass{
         temp2.setNext(temp3);
         node temp4 = new node(5);
         temp3.setNext(temp4); // denotes a null terminate list
-         */
+
     }
 
     // Method for checking whether a linked list is cyclic using Hash Table
@@ -316,6 +316,29 @@ class ListClass{
         }
     }
 
+    // Method for checking whether a linked list has a cycle using Floyd's Method
+    public void checkCyclicUsingFloyd(){
+        if (head == null)
+            return;
+
+        // Keep two pointers, fast pointer, slow pointer, if they meet before the list gets terminated, then there is a cycle
+        node fastPtr = head;
+        node slowPtr = head;
+        boolean flag = true;
+        while (fastPtr!=null && fastPtr.getNext()!=null && flag){
+            fastPtr = fastPtr.getNext().getNext();
+            slowPtr = slowPtr.getNext();
+            if(fastPtr == slowPtr){
+                flag = false;
+            }
+        }
+        if (flag){
+            System.out.println("The list is null terminated ");
+        }
+        else
+            System.out.println("The list has a cycle ");
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -344,7 +367,8 @@ public class ProblemsOnLinkedLists {
             System.out.println("7. Problem 1 : Find the nth node from the end of the linked list O(n2)");
             System.out.println("8. Problem 2 : Find the nth node from the end of the linked list O(n), HashTable ");
             System.out.println("9. Problem 3 : Find the nth node from the end of the linked list in one scan ");
-            System.out.println("10.Problem 10 : Find whether a linked list has a cycle or is null terminated ");
+            System.out.println("10.Problem 4 : Find whether a linked list has a cycle or is null terminated ");
+            System.out.println("11.Problem 5 : Finding a cyclic linked list using Floyd's Algorithm ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -385,6 +409,13 @@ public class ProblemsOnLinkedLists {
                     // Using hash table to check if the linked list is cyclic or not
                     listCyclic.checkCyclicUsingHash();
                     // list.checkCyclicUsingHash();
+                    break;
+                case 11:// Method for finding whether a linked list is cyclic or is null terminated
+                    // Method for first creating a linked list which may be null terminated or has a cycle
+                    ListClass lcFloyd = new ListClass();
+                    lcFloyd.createCyclicOrNullTerminatedList();
+                    // lcFloyd.traverse(); // generates an infinitely long linked list for a cyclic linked list
+                    lcFloyd.checkCyclicUsingFloyd();
                     break;
                 default:
                     System.out.println("Exit...");
