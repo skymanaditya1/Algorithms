@@ -35,8 +35,8 @@
       <file leaf-file-name="ProblemsOnLinkedLists.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/linkedlists/ProblemsOnLinkedLists.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5667276">
-              <caret line="380" column="47" selection-start-line="380" selection-start-column="44" selection-end-line="380" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.68007314">
+              <caret line="315" column="9" selection-start-line="315" selection-start-column="9" selection-end-line="315" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#263#264#0" expanded="true" />
@@ -47,6 +47,8 @@
                 <element signature="e#415#416#0" expanded="true" />
                 <element signature="e#442#443#0" expanded="true" />
                 <element signature="e#469#470#0" expanded="true" />
+                <element signature="e#506#507#0" expanded="true" />
+                <element signature="e#538#539#0" expanded="true" />
                 <element signature="e#566#567#0" expanded="true" />
                 <element signature="e#593#594#0" expanded="true" />
                 <element signature="e#663#664#0" expanded="true" />
@@ -538,7 +540,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24324325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45513514" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -591,6 +593,8 @@
             <element signature="e#415#416#0" expanded="true" />
             <element signature="e#442#443#0" expanded="true" />
             <element signature="e#469#470#0" expanded="true" />
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
             <element signature="e#566#567#0" expanded="true" />
             <element signature="e#593#594#0" expanded="true" />
             <element signature="e#663#664#0" expanded="true" />
@@ -1000,8 +1004,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/linkedlists/ProblemsOnLinkedLists.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5667276">
-          <caret line="380" column="47" selection-start-line="380" selection-start-column="44" selection-end-line="380" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.68007314">
+          <caret line="315" column="9" selection-start-line="315" selection-start-column="9" selection-end-line="315" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#263#264#0" expanded="true" />
@@ -1012,6 +1016,8 @@
             <element signature="e#415#416#0" expanded="true" />
             <element signature="e#442#443#0" expanded="true" />
             <element signature="e#469#470#0" expanded="true" />
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
             <element signature="e#566#567#0" expanded="true" />
             <element signature="e#593#594#0" expanded="true" />
             <element signature="e#663#664#0" expanded="true" />
