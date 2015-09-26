@@ -14,7 +14,7 @@ public class ImplementingHashTables {
         Hashtable hash = new Hashtable();
 
         // Add items to the hash table
-        hash.put("Aditya", new Double(100));
+        hash.put("John", new Double(100)); // key value pair
         hash.put("Peter", new Double(200));
         hash.put("Clark", new Double(300));
         hash.put("Bruce", new Double(400));
