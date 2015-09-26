@@ -241,6 +241,27 @@ class ListClass{
         }
     }
 
+    // Method for creating a cyclic or null terminated list
+    public void createCyclicOrNullTerminatedList(){
+
+        // Creating a linked list with a cycle
+       //  1-> 2-> 3-> 4-> 5-> 6-> 3-> 4-> 5-> 6-> 3-> ...
+
+        head = new node(1);
+        node temp1 = new node(2);
+        head.setNext(temp1);
+        node temp2 = new node(3);
+        temp1.setNext(temp2);
+        node temp3 = new node(4);
+        temp2.setNext(temp3);
+        node temp4 = new node(5);
+        temp3.setNext(temp4);
+        node temp5 = new node(6);
+        temp4.setNext(temp5);
+        temp5.setNext(temp2); // denotes a cycle
+
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -269,6 +290,7 @@ public class ProblemsOnLinkedLists {
             System.out.println("7. Problem 1 : Find the nth node from the end of the linked list O(n2)");
             System.out.println("8. Problem 2 : Find the nth node from the end of the linked list O(n), HashTable ");
             System.out.println("9. Problem 3 : Find the nth node from the end of the linked list in one scan ");
+            System.out.println("10.Problem 10 : Find whether a linked list has a cycle or is null terminated ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -301,6 +323,12 @@ public class ProblemsOnLinkedLists {
                     n = in.nextInt();
                     System.out.println("The value of the nth node from the end in single pass is : "+
                     list.NthNodeFromEndOnePass(n));
+                    break;
+                case 10:// Method for first creating a linked list which may be null terminated or has a cycle
+                    ListClass listCyclic = new ListClass();
+                    listCyclic.createCyclicOrNullTerminatedList();
+                    listCyclic.traverse(); // generates an infinitely long linked list, since a loop is present
+                    // System.out.println("The linked list is "+list.checkCycleOrNullTerminated);
                     break;
                 default:
                     System.out.println("Exit...");
