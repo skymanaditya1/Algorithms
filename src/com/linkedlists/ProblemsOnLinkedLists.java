@@ -1,5 +1,6 @@
 package com.linkedlists;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -243,7 +244,6 @@ class ListClass{
 
     // Method for creating a cyclic or null terminated list
     public void createCyclicOrNullTerminatedList(){
-
         // Creating a linked list with a cycle
        //  1-> 2-> 3-> 4-> 5-> 6-> 3-> 4-> 5-> 6-> 3-> ...
 
@@ -260,6 +260,60 @@ class ListClass{
         temp4.setNext(temp5);
         temp5.setNext(temp2); // denotes a cycle
 
+        // Creating a linked list without a cycle
+        // 1-> 2-> 3-> 4-> 5-> null
+
+        /**
+        head = new node(1);
+        node temp1 = new node(2);
+        head.setNext(temp1);
+        node temp2 = new node(3);
+        temp1.setNext(temp2);
+        node temp3 = new node(4);
+        temp2.setNext(temp3);
+        node temp4 = new node(5);
+        temp3.setNext(temp4); // denotes a null terminate list
+         */
+    }
+
+    // Method for checking whether a linked list is cyclic using Hash Table
+    public void checkCyclicUsingHash() {
+        Hashtable hashtable = new Hashtable();
+        // add the head of the ll to the hash table
+        if (head == null)
+            return;
+        hashtable.put(head, head.getData());
+
+        boolean flag = true;
+
+        // Create an enumeration for the entries of the hash table
+        Enumeration val = hashtable.keys();
+
+        node temp = head.getNext();
+        // traverse the linked list nodes one by one
+
+        int count = 0;
+
+        while(flag && temp!=null){
+            while(val.hasMoreElements()){
+                node check = (node) val.nextElement();
+                if (check.equals(temp)){
+                    flag = false;
+                    System.out.println("List is cyclic");
+                }
+            }
+            hashtable.put(temp, temp.getData());
+            val = hashtable.keys();
+            temp = temp.getNext();
+            count ++;
+        }
+
+        // the list is not cyclic
+        if(flag)
+            System.out.println("List is null terminated");
+        else{
+            System.out.println("Cycle found after node "+count); // denotes the number of nodes without cycle
+        }
     }
 
     // method for traversing the contents of the list
@@ -327,8 +381,10 @@ public class ProblemsOnLinkedLists {
                 case 10:// Method for first creating a linked list which may be null terminated or has a cycle
                     ListClass listCyclic = new ListClass();
                     listCyclic.createCyclicOrNullTerminatedList();
-                    listCyclic.traverse(); // generates an infinitely long linked list, since a loop is present
-                    // System.out.println("The linked list is "+list.checkCycleOrNullTerminated);
+                    // listCyclic.traverse(); // generates an infinitely long linked list, since a loop is present
+                    // Using hash table to check if the linked list is cyclic or not
+                    listCyclic.checkCyclicUsingHash();
+                    // list.checkCyclicUsingHash();
                     break;
                 default:
                     System.out.println("Exit...");
