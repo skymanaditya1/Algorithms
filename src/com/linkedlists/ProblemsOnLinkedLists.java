@@ -339,6 +339,45 @@ class ListClass{
             System.out.println("The list has a cycle ");
     }
 
+    // Method to return the start of the loop if the linked list contains a cycle
+    public void returnPositionOfCycle(){
+        // find if the list has a cycle using Floyd Algorithm
+        if (head == null)
+            return;
+
+        boolean isCyclic = false;
+
+        node slowPtr = head;
+        node fastPtr = head;
+        while(fastPtr != null && fastPtr.getNext()!=null && !isCyclic){
+            slowPtr = slowPtr.getNext();
+            fastPtr = fastPtr.getNext().getNext();
+            if(slowPtr == fastPtr){
+                isCyclic = true;
+            }
+        }
+
+        int countFromStart = 0;
+
+        if (isCyclic){
+            // find the position of the start of the cycle
+            slowPtr = head;
+            while(slowPtr!=fastPtr){
+                slowPtr = slowPtr.getNext();
+                fastPtr = fastPtr.getNext();
+                countFromStart += 1;
+            }
+        }
+
+        // return appropriate messages
+        if (isCyclic){
+            System.out.println("The list is cyclic at node "+fastPtr.getData()+" with position "+countFromStart+" from start");
+        }
+        else{
+            System.out.println("The list is null terminated ");
+        }
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -369,6 +408,7 @@ public class ProblemsOnLinkedLists {
             System.out.println("9. Problem 3 : Find the nth node from the end of the linked list in one scan ");
             System.out.println("10.Problem 4 : Find whether a linked list has a cycle or is null terminated ");
             System.out.println("11.Problem 5 : Finding a cyclic linked list using Floyd's Algorithm ");
+            System.out.println("12.Problem 6 : Cyclic or null terminated , if cycle return start of cycle ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -416,6 +456,14 @@ public class ProblemsOnLinkedLists {
                     lcFloyd.createCyclicOrNullTerminatedList();
                     // lcFloyd.traverse(); // generates an infinitely long linked list for a cyclic linked list
                     lcFloyd.checkCyclicUsingFloyd();
+                    break;
+                case 12: // Method to check if the linked list is null terminated or not, if there is a cycle find the
+                    // start node of the cycle
+                    // Method for creating a linked list which may be null terminated or has a cycle
+                    ListClass cycleStart = new ListClass();
+                    cycleStart.createCyclicOrNullTerminatedList();
+                    // cycleStart.traverse(); // Method to generate an infinitely long list for a cyclic list
+                    cycleStart.returnPositionOfCycle();
                     break;
                 default:
                     System.out.println("Exit...");
