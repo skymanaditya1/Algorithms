@@ -508,6 +508,28 @@ class ListClass{
         head = tempTail;
     }
 
+    // Method to reverse a list in linear time complexity
+    public void reverseListIterative(){
+        // check if the list is empty
+        if (head == null) return;
+
+        // check if the list has only one element, in that case return the element itself
+        if (head.getNext() == null) return;
+
+        // reverse the list
+        node current = head;
+        node prev = null;
+        while(current != null){
+            node next = current.getNext();
+            current.setNext(prev);
+            prev = current;
+            current = next;
+        }
+
+        // prev was the tail of the original list, make head equal to prev
+        head = prev;
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -618,7 +640,8 @@ public class ProblemsOnLinkedLists {
                     list.insertNodeSorted(data);
                     break;
                 case 16: // Method to reverse the nodes of the singly linked list
-                    list.reverseListBruteForce(); // This is an O(n^2) approach
+                    // list.reverseListBruteForce(); // This is an O(n^2) approach
+                    list.reverseListIterative(); // This is a linear time complexity algorithm
                     break;
                 default:
                     System.out.println("Exit...");
