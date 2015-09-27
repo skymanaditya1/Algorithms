@@ -476,6 +476,38 @@ class ListClass{
         }
     }
 
+    // Method to traverse the list
+    public void reverseListBruteForce(){
+        // check if the list is empty
+        if (head == null)
+            return;
+
+        // if the list has one node, return
+        if (head.getNext()==null)
+            return;
+
+        // reverse the list
+
+        // keep the tail in a temporary variable to be made the new head
+        node tempTail = head;
+        while(tempTail.getNext()!=null)
+            tempTail = tempTail.getNext();
+
+        while(head.getNext()!=null){
+            node current = head;
+            node previous = null;
+            while(current.getNext()!=null){
+                previous = current;
+                current = current.getNext();
+            }
+            current.setNext(previous);
+            previous.setNext(null);
+        }
+
+        // set the head as the tail of the original list
+        head = tempTail;
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -510,6 +542,7 @@ public class ProblemsOnLinkedLists {
             System.out.println("13.Problem 7 : Cyclic or null terminated, if cyclic return the length of the cycle ");
             System.out.println("14.Problem 8 : Sort the linked list ");
             System.out.println("15.Problem 9 : Insert a node in a sorted linked list ");
+            System.out.println("16.Problem 10: Reverse the list ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -583,6 +616,9 @@ public class ProblemsOnLinkedLists {
                     System.out.println("Enter the node to be inserted into the sorted list : ");
                     data = in.nextInt();
                     list.insertNodeSorted(data);
+                    break;
+                case 16: // Method to reverse the nodes of the singly linked list
+                    list.reverseListBruteForce(); // This is an O(n^2) approach
                     break;
                 default:
                     System.out.println("Exit...");
