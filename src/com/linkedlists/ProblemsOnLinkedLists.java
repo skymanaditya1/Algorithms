@@ -415,6 +415,35 @@ class ListClass{
         }
     }
 
+    // Method to sort the elements of a linked list using selection sort
+    public void sortUsingSelectionSort(){
+        // Typical Selection Sort Algorithm
+        /**int[] a = {5, 2, 1, 8, 5};
+        for(int i=0; i<a.length-1; i++){
+            int pos = i;
+            for(int j=i+1; j<a.length; j++){
+                if (a[j] < a[pos])
+                    pos = j;
+            }
+            int temp = a[i];
+            a[i] = a[pos];
+            a[pos] = temp;
+        }*/
+        if (head == null)
+            return;
+
+        for(node i = head; i.getNext()!=null; i = i.getNext()){
+            node pos = i;
+            for (node j = i.getNext(); j!=null; j = j.getNext()){
+                if (j.getData() < pos.getData())
+                    pos = j;
+            }
+            int temp = i.getData();
+            i.setData(pos.getData());
+            pos.setData(temp);
+        }
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -447,6 +476,7 @@ public class ProblemsOnLinkedLists {
             System.out.println("11.Problem 5 : Finding a cyclic linked list using Floyd's Algorithm ");
             System.out.println("12.Problem 6 : Cyclic or null terminated, if cyclic return start of cycle ");
             System.out.println("13.Problem 7 : Cyclic or null terminated, if cyclic return the length of the cycle ");
+            System.out.println("14.Problem 8 : Sort the linked list ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -510,6 +540,9 @@ public class ProblemsOnLinkedLists {
                     cycleLength.createCyclicOrNullTerminatedList();
                     // cycleLength.traverse(); // Method to generate an infinitely long list for a cyclic list
                     cycleLength.findCycleLength();
+                    break;
+                case 14: // Method to sort the elements of a linked list using selection sort
+                    list.sortUsingSelectionSort();
                     break;
                 default:
                     System.out.println("Exit...");
