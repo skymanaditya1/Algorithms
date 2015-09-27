@@ -40,7 +40,7 @@ class ArrayStack {
 
     public ArrayStack(int cap) {
         capacity = cap;
-        stack = new int[cap];
+        stack = new int[capacity];
     }
 
     // method that returns the size of the stack, O(1) time complexity
@@ -100,6 +100,7 @@ public class FixedArrayStackImplementation {
         int size = in.nextInt();
         int data;
         ArrayStack s = new ArrayStack(size);
+        // ArrayStack s = new ArrayStack(); // takes the default capacity as specified by CAPACITY (10 in this case)
         while (true) {
             System.out.println("Menu. Enter your choice ");
             System.out.println("1. Push an element into the stack ");
