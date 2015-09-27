@@ -444,6 +444,38 @@ class ListClass{
         }
     }
 
+    // Method for inserting the node in a sorted list
+    public void insertNodeSorted(int data){
+        // Works in a similar way to insertion sort
+        // if the list is empty
+
+        node newNode = new node(data);
+
+        if (head == null){
+            head = newNode;
+            return;
+        }
+
+        // Check if the node to be inserted is less than the head node in the sorted list
+        if (newNode.getData() < head.getData()){
+            // insert before the head of the list
+            newNode.setNext(head);
+            head = newNode;
+        }
+
+        else{
+            // Insert at the appropriate position
+            node current = head;
+            node previous = null;
+            while ( current != null && current.getData() < newNode.getData()){
+                previous = current;
+                current = current.getNext();
+            }
+            newNode.setNext(current);
+            previous.setNext(newNode);
+        }
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -477,6 +509,7 @@ public class ProblemsOnLinkedLists {
             System.out.println("12.Problem 6 : Cyclic or null terminated, if cyclic return start of cycle ");
             System.out.println("13.Problem 7 : Cyclic or null terminated, if cyclic return the length of the cycle ");
             System.out.println("14.Problem 8 : Sort the linked list ");
+            System.out.println("15.Problem 9 : Insert a node in a sorted linked list ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -543,6 +576,13 @@ public class ProblemsOnLinkedLists {
                     break;
                 case 14: // Method to sort the elements of a linked list using selection sort
                     list.sortUsingSelectionSort();
+                    break;
+                case 15: // Method to insert a node in a sorted linked list in a way similar to insertion sort
+                    // before inserting the node in a sorted list, the list has to be sorted
+                    list.sortUsingSelectionSort();
+                    System.out.println("Enter the node to be inserted into the sorted list : ");
+                    data = in.nextInt();
+                    list.insertNodeSorted(data);
                     break;
                 default:
                     System.out.println("Exit...");
