@@ -95,9 +95,46 @@ class StackImplementation {
     }
 
     // method for converting a given infix expression string to postfix expression string
-    public String convertInfixToPostfix(String infixString){
+    // code to be completed later, for converting an infix to postfix expression.
+    public String convertInfixToPostfix(String infixString) {
         // Incomplete method
         return null;
+    }
+
+    // Method to evaluate a postfix expression
+    public int evaluatePostfixExpression(String str) throws Exception {
+        String[] tokens = str.split("");
+        Stack<Integer> stk = new Stack<Integer>();
+        // The second operand is the first element that is popped
+        for (String token : tokens) {
+            if (token.equals("+")) {
+                int op1 = stk.pop();
+                int op2 = stk.pop();
+                int retVal = op1 + op2;
+                stk.push(retVal);
+            } else if (token.equals("-")) {
+                int op1 = stk.pop();
+                int op2 = stk.pop();
+                int retVal = op2 - op1;
+                stk.push(retVal);
+            } else if (token.equals("*")) {
+                int op1 = stk.pop();
+                int op2 = stk.pop();
+                int retVal = op1 * op2;
+                stk.push(retVal);
+            } else if (token.equals("/")) {
+                int op1 = stk.pop();
+                int op2 = stk.pop();
+                if (op1 == 0)
+                    throw new Exception("Cannot evaluate postfix expression ");
+                int retVal = op2 / op1;
+                stk.push(retVal);
+            } else { // an operand
+                stk.push(Integer.parseInt(token));
+            }
+        }
+        // return the top of the stack as result when the entire input string (postfix expression) is scanned
+        return stk.pop();
     }
 
     // Method to traverse the contents of the stack, implements the toString() method
@@ -128,6 +165,7 @@ public class ProblemsOnStack {
             System.out.println("3. Print the contents of the stack ");
             System.out.println("4. Check for balancing of symbols in a String ");
             System.out.println("5. Convert an infix to postfix expression ");
+            System.out.println("6. Evaluate a postfix expression ");
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
@@ -160,7 +198,17 @@ public class ProblemsOnStack {
                 case 5:
                     System.out.println("Enter the infix expression string : ");
                     String infixString = in.nextLine();
-                    System.out.println("The postfix string is : "+s.convertInfixToPostfix(infixString));
+                    System.out.println("The postfix string is : " + s.convertInfixToPostfix(infixString));
+                    break;
+                case 6:
+                    System.out.println("Enter a postfix expression : ");
+                    in.nextLine();
+                    String postfix = in.nextLine();
+                    try {
+                        System.out.println("The result of the postfix expression is : " + s.evaluatePostfixExpression(postfix));
+                    } catch (Exception e) {
+                        System.out.println("Exception of type : " + e.toString());
+                    }
                     break;
                 default:
                     System.out.println("Exit ...");
