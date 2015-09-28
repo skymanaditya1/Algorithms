@@ -94,6 +94,12 @@ class StackImplementation {
             return false;
     }
 
+    // method for converting a given infix expression string to postfix expression string
+    public String convertInfixToPostfix(String infixString){
+        // Incomplete method
+        return null;
+    }
+
     // Method to traverse the contents of the stack, implements the toString() method
     public String toString() {
         String result = "[";
@@ -121,6 +127,7 @@ public class ProblemsOnStack {
             System.out.println("2. Pop an element from the stack ");
             System.out.println("3. Print the contents of the stack ");
             System.out.println("4. Check for balancing of symbols in a String ");
+            System.out.println("5. Convert an infix to postfix expression ");
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
@@ -149,6 +156,11 @@ public class ProblemsOnStack {
                         System.out.println("The string is valid / has balanced symbols ");
                     else
                         System.out.println("The string is invalid / symbols are unbalanced ");
+                    break;
+                case 5:
+                    System.out.println("Enter the infix expression string : ");
+                    String infixString = in.nextLine();
+                    System.out.println("The postfix string is : "+s.convertInfixToPostfix(infixString));
                     break;
                 default:
                     System.out.println("Exit ...");
