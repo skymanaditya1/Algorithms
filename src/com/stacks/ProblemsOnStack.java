@@ -159,6 +159,89 @@ class StackImplementation {
             System.out.println("The string is not a palindrome");
     }
 
+    // Method to return node at the top of the stack
+    public node topStack(){
+        return top;
+    }
+
+    // Method to reverse the contents of the stack using two stacks
+    public node reverseStack(){
+        // make a system stack
+        StackImplementation sR = new StackImplementation();
+        while (top!=null){
+            sR.push(top.getData());
+            top = top.getNext();
+        }
+        top = sR.topStack();
+        return top;
+    }
+
+    // Method to traverse the contents of the stack, using the top as an argument
+    public void traverse(node top){
+        while (top!=null) {
+            System.out.print(top.getData() + " ");
+            top = top.getNext();
+        }
+        System.out.println();
+    }
+
+    // Method to create the intersecting node linked lists
+    public node[] createIntersectingNodeLinkedList(){
+        // create the first linked list
+        node node1 = new node(1);
+        node node2 = new node(2);
+        node intersectingNode = new node(3); // The intersecting node
+        node node4 = new node(4);
+        node node5 = new node(5);
+        node node6 = new node(6);
+        node node7 = new node(7);
+        node node8 = new node(8);
+
+        node1.setNext(node2); // head of the first list
+        node2.setNext(intersectingNode);
+        intersectingNode.setNext(node4);
+        node4.setNext(node5);
+        node5.setNext(null);
+
+        node6.setNext(node7); // head of the second list
+        node7.setNext(node8);
+        node8.setNext(intersectingNode);
+
+        // return the head of the two lists
+        node[] nArray = {node1, node6}; // returns the head of the two lists respectively
+        // The value of the intersecting node is -> 3
+        return nArray;
+    }
+
+    // Method to return the intersecting node in two linked lists
+    public node findIntersectingNode(node[] arr){
+        node head1 = arr[0]; // head of the first linked list
+        node head2 = arr[1]; // head of the second linked list
+        // Push the nodes of the linked lists inside the stack
+        Stack<node> stk1 = new Stack<>(); // Stack of nodes of 1st linked list
+        while (head1 != null){
+            stk1.push(head1);
+            head1 = head1.getNext();
+        }
+
+        Stack<node> stk2 = new Stack<>(); // Stack of nodes of 2nd linked list
+        while (head2 != null){
+            stk2.push(head2);
+            head2 = head2.getNext();
+        }
+
+        // Pop the nodes of the stack and check if they have the same corresponding address
+        while (!stk1.empty() && !stk2.empty()){
+            if (stk1.peek().equals(stk2.peek())){
+                // a matching node has been found
+                return stk1.peek(); // same as stk2.peek()
+            }
+            stk1.pop();
+            stk2.pop();
+        }
+        return null;
+    }
+
     // Method to traverse the contents of the stack, implements the toString() method
     public String toString() {
         String result = "[";
@@ -185,10 +268,12 @@ public class ProblemsOnStack {
             System.out.println("1. Push an element into the stack ");
             System.out.println("2. Pop an element from the stack ");
             System.out.println("3. Print the contents of the stack ");
-            System.out.println("4. Check for balancing of symbols in a String ");
-            System.out.println("5. Convert an infix to postfix expression ");
-            System.out.println("6. Evaluate a postfix expression ");
-            System.out.println("7. Check if a given string is palindrome ");
+            System.out.println("4. Problem 1: Check for balancing of symbols in a String ");
+            System.out.println("5. Problem 2: Convert an infix to postfix expression ");
+            System.out.println("6. Problem 3: Evaluate a postfix expression ");
+            System.out.println("7. Problem 4: Check if a given string is palindrome ");
+            System.out.println("8. Problem 5: Reverse the contents of the stack using two stacks ");
+            System.out.println("9. Problem 6: Find out the intersecting node in two linked lists using stacks ");
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
@@ -238,6 +323,23 @@ public class ProblemsOnStack {
                     in.nextLine();
                     String palindromeCheck = in.nextLine();
                     s.checkPalindromeUsingStack(palindromeCheck);
+                    break;
+                case 8:
+                    System.out.println("Reverse the contents of the stack ");
+                    node tempTop = s.reverseStack();
+                    s.traverse(tempTop);
+                    break;
+                case 9:
+                    // method to create the linked lists as given in the question
+                    StackImplementation ll = new StackImplementation();
+                    node[] arr = ll.createIntersectingNodeLinkedList();
+                    // Method to display the lists
+                    ll.traverse(arr[0]);
+                    ll.traverse(arr[1]);
+                    // Return the node address and value of the intersecting node
+                    node intersectingNode = ll.findIntersectingNode(arr);
+                    System.out.println("The address of the intersecting node is : "+intersectingNode+" and value is : "
+                            + intersectingNode.getData());
                     break;
                 default:
                     System.out.println("Exit ...");
