@@ -137,6 +137,28 @@ class StackImplementation {
         return stk.pop();
     }
 
+    // Method to check if a string is a palindrome using a stack
+    public void checkPalindromeUsingStack(String str){
+        Stack<Character> stk = new Stack<>();
+        int i = 0, j = str.length() - 1;
+        while (str.charAt(i) != 'X'){
+            stk.push(str.charAt(i));
+            i++;
+        }
+        i++; // points to the character immediately after X
+        boolean flag = true;
+        while (flag && i < str.length()){
+            if (str.charAt(i) != stk.peek())
+                flag = false;
+            i++;
+            stk.pop();
+        }
+        if (flag)
+            System.out.println("The string is a palindrome");
+        else
+            System.out.println("The string is not a palindrome");
+    }
+
     // Method to traverse the contents of the stack, implements the toString() method
     public String toString() {
         String result = "[";
@@ -166,6 +188,7 @@ public class ProblemsOnStack {
             System.out.println("4. Check for balancing of symbols in a String ");
             System.out.println("5. Convert an infix to postfix expression ");
             System.out.println("6. Evaluate a postfix expression ");
+            System.out.println("7. Check if a given string is palindrome ");
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
@@ -209,6 +232,12 @@ public class ProblemsOnStack {
                     } catch (Exception e) {
                         System.out.println("Exception of type : " + e.toString());
                     }
+                    break;
+                case 7:
+                    System.out.println("Enter the string to check if it is palindrome : ");
+                    in.nextLine();
+                    String palindromeCheck = in.nextLine();
+                    s.checkPalindromeUsingStack(palindromeCheck);
                     break;
                 default:
                     System.out.println("Exit ...");
