@@ -2,6 +2,7 @@ package com.linkedlists;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -530,6 +531,90 @@ class ListClass{
         head = prev;
     }
 
+    // Method to reverse the linked list taking the head as the argument, and return the head of the
+    // reversed list
+    public node reverseListFirstNode(node head){
+        if (head == null)
+            return null;
+        if (head.getNext() == null)
+            return head;
+        else{
+            node current = head, previous = null;
+            while (current != null){
+                node next = current.getNext();
+                current.setNext(previous);
+                previous = current;
+                current = next;
+            }
+            return previous; // head of the reversed list
+        }
+    }
+
+    // Method to create a linked list of a given size
+    public node createLinkedList(int size){
+        Random rand = new Random();
+        node headNode = null;
+        for(int i=0; i<size; i++){
+            node temp = new node(rand.nextInt(10));
+            if (headNode == null)
+                headNode = temp;
+            else{
+                node t1 = headNode;
+                while(t1.getNext()!=null)
+                    t1 = t1.getNext();
+                t1.setNext(temp);
+            }
+        }
+        return headNode;
+    }
+
+    // Method to subtract the two linked lists
+    public node subtractLists(node head1, node head2){
+        node first = null; // head of the subtracted list
+        String list1 = "";
+        String list2 = "";
+        while (head1!=null){
+            list1 += head1.getData();
+            head1 = head1.getNext();
+        }
+        while (head2!=null){
+            list2 += head2.getData();
+            head2 = head2.getNext();
+        }
+        int subtractedAnswer = Integer.parseInt(list1) - Integer.parseInt(list2);
+        int n = subtractedAnswer;
+        while (n>0){
+           node t = new node(n%10);
+            n = n / 10;
+            if (first == null){
+                first = t;
+            }
+            else{
+                node temp = first;
+                while (temp.getNext()!=null)
+                    temp = temp.getNext();
+                temp.setNext(t);
+            }
+        }
+        // reverse the list with first as the head
+        first = reverseListFirstNode(first);
+        return first;
+    }
+
+    // method for traversing the contents of the list, taking the first node as the argument
+    public void traverseFirst(node first){
+        if (first == null)
+            return;
+        else{
+            while(first!=null)
+            {
+                System.out.print(first.getData()+" ");
+                first = first.getNext();
+            }
+            System.out.println();
+        }
+    }
+
     // method for traversing the contents of the list
     public void traverse(){
         node temp = head;
@@ -565,6 +650,7 @@ public class ProblemsOnLinkedLists {
             System.out.println("14.Problem 8 : Sort the linked list ");
             System.out.println("15.Problem 9 : Insert a node in a sorted linked list ");
             System.out.println("16.Problem 10: Reverse the list ");
+            System.out.println("17.Problem 11: Subtract two linked lists ");
             int choice = in.nextInt();
             switch(choice){
                 case 1:System.out.println("Enter the element to be inserted : ");
@@ -642,6 +728,22 @@ public class ProblemsOnLinkedLists {
                 case 16: // Method to reverse the nodes of the singly linked list
                     // list.reverseListBruteForce(); // This is an O(n^2) approach
                     list.reverseListIterative(); // This is a linear time complexity algorithm
+                    break;
+                case 17: // Method to subtract two linked lists
+                    // Method to create two linked lists and return the pointer to the first node in the list
+                    ListClass twoLinkedLists = new ListClass();
+                    System.out.println("Enter the length of the first linked list : ");
+                    int size = in.nextInt();
+                    node list1 = twoLinkedLists.createLinkedList(size);
+                    twoLinkedLists.traverseFirst(list1);
+                    System.out.println("Enter the size of the second linked list : ");
+                    size = in.nextInt();
+                    node list2 = twoLinkedLists.createLinkedList(size);
+                    twoLinkedLists.traverseFirst(list2);
+                    // subtract two lists and returns the head of the new list
+                    node newList = twoLinkedLists.subtractLists(list1, list2);
+                    System.out.println("The subtracted list is : ");
+                    twoLinkedLists.traverseFirst(newList);
                     break;
                 default:
                     System.out.println("Exit...");
