@@ -287,6 +287,22 @@ class StackImplementation {
             return null;
     }
 
+    // Method to sort the contents of the stack in ascending order
+    public void sortAscendingOrder(){
+        // The contents of the stack can be sorted using selection sort algorithm
+        for (node i = top; i.getNext()!=null; i = i.getNext()){
+            node pos = i;
+            for (node j = i.getNext(); j!=null; j = j.getNext()){
+                if (j.getData() < pos.getData())
+                    pos = j;
+            }
+            int temp = i.getData();
+            i.setData(pos.getData());
+            pos.setData(temp);
+        }
+        traverse(top);
+    }
+
     // Method to traverse the contents of the stack, implements the toString() method
     public String toString() {
         String result = "[";
@@ -301,6 +317,8 @@ class StackImplementation {
         result += "]";
         return result;
     }
+
+    // Method to traverse the contents of the stack, using the top as the argument
 }
 
 public class ProblemsOnStack {
@@ -320,6 +338,7 @@ public class ProblemsOnStack {
             System.out.println("8. Problem 5: Reverse the contents of the stack using two stacks ");
             System.out.println("9. Problem 6: Find out the intersecting node in two linked lists using stacks ");
             System.out.println("10.Problem 7: Check if a given string can be permuted ");
+            System.out.println("11.Problem 8: Sort the contents of the stack in ascending order ");
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
@@ -400,6 +419,11 @@ public class ProblemsOnStack {
                     }else{
                         System.out.println("The given string cannot be permuted in the said order ");
                     }
+                    break;
+                case 11:System.out.println("The contents of the stack in ascending order are : (Implemented Using " +
+                        "Selection Sort");
+                    s.sortAscendingOrder();
+                    // s.toString();
                     break;
                 default:
                     System.out.println("Exit ...");
