@@ -219,27 +219,72 @@ class StackImplementation {
         node head2 = arr[1]; // head of the second linked list
         // Push the nodes of the linked lists inside the stack
         Stack<node> stk1 = new Stack<>(); // Stack of nodes of 1st linked list
+        System.out.println("Head 1 : " + head1.getData());
         while (head1 != null){
             stk1.push(head1);
+            System.out.println(head1 + " : " + head1.getData());
             head1 = head1.getNext();
         }
 
         Stack<node> stk2 = new Stack<>(); // Stack of nodes of 2nd linked list
+        System.out.println("Head 2 : " + head2.getData());
         while (head2 != null){
             stk2.push(head2);
+            System.out.println(head2 + " : " + head2.getData());
             head2 = head2.getNext();
         }
 
         // Pop the nodes of the stack and check if they have the same corresponding address
+        node val = null; // The value of the intersecting node
+
         while (!stk1.empty() && !stk2.empty()){
             if (stk1.peek().equals(stk2.peek())){
                 // a matching node has been found
-                return stk1.peek(); // same as stk2.peek()
+                val = stk1.peek();
+                stk1.pop();
+                stk2.pop();
             }
-            stk1.pop();
-            stk2.pop();
+            else{
+                return val;
+            }
         }
         return null;
+    }
+
+    // Method to accept an input and a permutation, it performs a series of push S() and pop X() operations, to check
+    // if the given permutation can be obtained from the input
+    public String checkPermutationPermitted(String input, String permutation){
+        String[] str1 = input.split("");
+        String[] str2 = permutation.split("");
+        Stack<Integer> stk = new Stack<>();
+        int i=0, j=0;
+        String result = "";
+        while (i < str1.length){
+            if (Integer.parseInt(str1[i]) != Integer.parseInt(str2[j])){
+                stk.push(Integer.parseInt(str1[i]));
+                i += 1;
+                result += "S";
+            }
+            else{
+                stk.push(Integer.parseInt(str1[i]));
+                i += 1;
+                result += "S";
+                while (j < str2.length && !stk.isEmpty() && stk.peek() == Integer.parseInt(str2[j])){
+                    stk.pop();
+                    j += 1;
+                    result += "X";
+                }
+            }
+        }
+
+        System.out.println(result);
+
+        if (j == str2.length){
+            return result;
+        }
+
+        else
+            return null;
     }
 
     // Method to traverse the contents of the stack, implements the toString() method
@@ -274,6 +319,7 @@ public class ProblemsOnStack {
             System.out.println("7. Problem 4: Check if a given string is palindrome ");
             System.out.println("8. Problem 5: Reverse the contents of the stack using two stacks ");
             System.out.println("9. Problem 6: Find out the intersecting node in two linked lists using stacks ");
+            System.out.println("10.Problem 7: Check if a given string can be permuted ");
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
@@ -340,6 +386,20 @@ public class ProblemsOnStack {
                     node intersectingNode = ll.findIntersectingNode(arr);
                     System.out.println("The address of the intersecting node is : "+intersectingNode+" and value is : "
                             + intersectingNode.getData());
+                    break;
+                case 10:System.out.println("Enter the input string (array of integers) : ");
+                    in.nextLine();
+                    String input = in.nextLine();
+                    System.out.println("Enter the permutation to match the string of integers : ");
+                    String permutation = in.nextLine();
+                    StackImplementation cp = new StackImplementation();
+                    String checkPermitted = cp.checkPermutationPermitted(input, permutation);
+                    if (checkPermitted!=null){
+                        System.out.println("The Permutation of the String is possible and the order of operations is : "+
+                        checkPermitted);
+                    }else{
+                        System.out.println("The given string cannot be permuted in the said order ");
+                    }
                     break;
                 default:
                     System.out.println("Exit ...");
